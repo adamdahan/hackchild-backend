@@ -15,8 +15,9 @@ todosRouter.post('/', (req, res) => {
     return res.status(422).json({ error: { code: 'TITLE_REQUIRED', message: 'title is required' } });
   }
 
-  // The client generates the id so it can render optimistically before the
-  // round trip completes. We honour it rather than minting our own.
+  // NOTE: the client sends a `clientId` so it can render optimistically, but we
+  // deliberately do not use it — the store mints its own id. The optimistic row
+  // is therefore replaced rather than reconciled on refetch.
   const todo = store.create({ title });
   res.status(201).json({ todo });
 });
