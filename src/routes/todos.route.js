@@ -17,7 +17,7 @@ todosRouter.post('/', (req, res) => {
 
   // The client generates the id so it can render optimistically before the
   // round trip completes. We honour it rather than minting our own.
-  const todo = store.create({ id: req.body.clientId, title });
+  const todo = store.create({ title });
   res.status(201).json({ todo });
 });
 
