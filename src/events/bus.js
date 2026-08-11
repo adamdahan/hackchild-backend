@@ -7,7 +7,7 @@ export function register(handler) {
 
 export function publish(event) {
   const match = handlers.find((h) => h.canHandle(event));
-  if (!match) return; // silently dropped — see mechanisms/backend/event-bus.md
+  if (!match) return; // silently dropped — see docs/platform/event-bus.md
   queueMicrotask(() => {
     match.handle(event).catch((err) => console.error('[bus] handler failed', err));
   });
